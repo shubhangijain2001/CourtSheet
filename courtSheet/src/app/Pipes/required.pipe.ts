@@ -5,8 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class RequiredPipe implements PipeTransform {
 
-  transform(value:any) {
-    return value+"*";
+
+  transform(value: unknown, ...args: unknown[]): unknown {
+    return value+'*';
+
   }
 
 }

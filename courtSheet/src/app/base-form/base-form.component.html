@@ -1,5 +1,76 @@
 <div class="container mt-5">
-    <h5>Prepare Court Sheet</h5>
-    <hr>
-    
+  <h5>Prepare Court Sheet</h5>
+
+  
+  <hr>
+
+
+  <form [formGroup]="form" class="row g-3">
+    <div class="col-md-4">
+      <label for="court4" class="form-label">Court <span style="color: red;">{{'' | required}}</span></label>
+      <input class="form-control" id="court4" formControlName="court">
+      <div *ngIf="fc.court.errors?.required">
+        <div *ngIf="fc.court.touched && fc.court.invalid" class="alert alert-danger">Field is required</div>
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+        <label for="courtDate4" class="form-label">Court Date<span style="color: red;">{{'' | required}}</span></label>
+        <select name="" id="" class="form-select" id="courtDate4" formControlName="courtDate">
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+        <div *ngIf="fc.courtDate.errors?.required">
+            <div *ngIf="fc.courtDate.touched && fc.courtDate.invalid" class="alert alert-danger">Field is required</div>
+          </div>
+    </div>
+
+
+    <div class="col-md-4">
+        <label for="" class="form-label">Sort By</label>
+        <select name="" id="" class="form-select" formControlName="sortBy">
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+    </div>
+
+
+    <div class="col-md-4">
+        <label for="courtDate4" class="form-label">Number of records to be fetched<span style="color: red;">{{'' | required}}</span></label>
+        <input name="" id="" class="form-control" id="courtDate4" formControlName="recordNo" (keyup)="recordNo($event)">
+        <div *ngIf="fc.recordNo.errors?.required">
+            <div *ngIf="fc.recordNo.touched && fc.recordNo.invalid" class="alert alert-danger">Field is required</div>
+          </div>
+          <div *ngIf="fc.recordNo.errors?.pattern" class="alert alert-danger">
+            Only numbers allowed
+            <!-- <div *ngIf="fc.recordNo.touched && fc.recordNo.invalid" class="alert alert-danger">Only numbers are allowed</div> -->
+          </div>
+    </div>
+
+
+    <div class="col-md-4">
+        <label for="courtDate4" class="form-label">Mode of entry</label>
+        <select name="" id="" class="form-select" id="courtDate4" formControlName="mode"></select>
+    </div>
+
+
+    <div class="col-md-1"></div>
+
+
+    <div class="col-md-2 ">
+        <button class="btn btn-success" (click)="submit()" [disabled]="form.invalid">Generate list</button>
+        
+    </div>
+
+
+    <div class="col-md-1">
+        <button class="btn btn-success" (click)="clear()" >Clear</button>
+        
+    </div>
+
+
+
+</form>
 </div>
+
