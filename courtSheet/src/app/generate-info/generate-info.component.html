@@ -1,0 +1,89 @@
+<div class="container mt-5">
+    <div>
+      <label>Auto Generate Information Number &nbsp;</label>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="true" checked (click)="checkVisibility($event)">
+        <label class="form-check-label" for="inlineRadio1">Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="false" (click)="checkVisibility($event)">
+        <label class="form-check-label" for="inlineRadio2">No</label>
+      </div>
+    </div>
+    <br>
+
+    <form class="row g-3" [formGroup] = 'form'>
+      <div class="col" *ngIf="isVisible==true">
+          <label for="inputPrefix" class="form-label">Prefix</label>
+          <input 
+          type="text" 
+          class="form-control" 
+          id="inputPrefix"
+          formControlName="prefix"
+          (change)="loadPrefix($event)"
+          >
+      </div>
+      <div class="col" *ngIf="isVisible==true">
+          <label for="inputSeqNo" class="form-label">Sequence Number</label>
+          <input 
+          type="text" 
+          class="form-control" 
+          id="inputSeqNo"
+          formControlName="sequenceNo"
+          (change)="loadSeqNo($event)"
+          >
+          <div class="alert alert-danger" *ngIf="fc.sequenceNo.errors?.pattern">Only numbers are allowed</div>
+      </div>
+      <div class="col">
+          <label for="inputMag" class="form-label">Assign Magistrate</label>
+          <select 
+          id="inputMag" 
+          class="form-select"
+          formControlName="assignMag"
+          >
+              <option selected disabled>Select Magistrate</option>
+              <option>Delhi</option>
+              <option>Mumbai</option>
+          </select>
+      </div>
+      <div class="col">
+          <label for="inputSlot" class="form-label">Assign Slot<span class="pipe">{{'' | required}}</span></label>
+          <select
+          id="inputSlot" 
+          class="form-select"
+          formControlName="assignSlot"
+          >
+              <option selected disabled>Select Slot</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+          </select>
+      </div>
+  </form>
+  <hr>
+    
+  <div class="container mt-5">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Ticket Number</th>
+                <th>Issue Date</th>
+                <th>Offender Name</th>
+                <th>Information Number<span class="pipe">{{'' | required}}</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let ticket of tickets; let i=index">
+                <td>{{ticket.ticketNo}}</td>
+                <td>{{ticket.issueDate | date:'shortDate' }}</td>
+                <td>{{ticket.offenderName}}</td>
+                <td>
+                    <label *ngIf="isVisible==true">{{prefix}}{{seqNo+i}}</label>
+                    <input *ngIf="isVisible==false" type="text" class="form-control">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>

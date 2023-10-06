@@ -1,0 +1,48 @@
+<div class="container md-5">
+    <form class="row g-3" [formGroup] = 'form'>
+        <div class="col" *ngIf="visibility==true">
+            <label for="inputPrefix" class="form-label">Prefix</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            id="inputPrefix"
+            formControlName="prefix"
+            >
+        </div>
+        <div class="col" *ngIf="visibility==true">
+            <label for="inputSeqNo" class="form-label">Sequence Number</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            id="inputSeqNo"
+            formControlName="sequenceNo"
+            >
+        </div>
+        <div class="col">
+            <label for="inputMag" class="form-label">Assign Magistrate</label>
+            <select 
+            id="inputMag" 
+            class="form-select"
+            formControlName="assignMag"
+            >
+                <option selected disabled>Select Magistrate</option>
+                <option>Delhi</option>
+                <option>Mumbai</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="inputSlot" class="form-label">Assign Slot{{'' | required}}</label>
+            <select
+            id="inputSlot" 
+            class="form-select"
+            formControlName="assignSlot"
+            >
+                <option selected disabled>Select Slot</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+        </div>
+    </form>
+
+</div>
