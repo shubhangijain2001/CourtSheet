@@ -9,8 +9,7 @@ import { RequiredPipe } from './Pipes/required.pipe'
 
 import { BaseFormComponent } from './base-form/base-form.component';
 import { GenerateInfoComponent } from './generate-info/generate-info.component';
-
-
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,7 @@ import { GenerateInfoComponent } from './generate-info/generate-info.component';
     FormsModule,
     BrowserAnimationsModule,
     DropdownModule,
-    
+    HttpClientModule
 
   ],
   providers: [],
