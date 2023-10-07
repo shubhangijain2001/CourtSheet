@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { RequiredPipe } from '../Pipes/required.pipe';
 
 @Component({
@@ -16,6 +16,9 @@ export class GenerateInfoComponent{
   seqNo:number=0;
   infoNo:string='';
   pageLoad:boolean=true;
+  informationNo?:FormArray<any>;
+  @Output() childEmitter = new EventEmitter();
+
 
   tickets = [
     {
@@ -41,7 +44,8 @@ export class GenerateInfoComponent{
       prefix:['',Validators.pattern("[a-zA-Z0-9]+$")],
       sequenceNo:['',Validators.pattern("[0-9]*")],
       assignMag:[''],
-      assignSlot:['', Validators.required]
+      assignSlot:['', Validators.required],
+      infoNoInput: fb.array([]) 
     })
   }
 
@@ -56,17 +60,37 @@ export class GenerateInfoComponent{
 
   loadPrefix(e:any){
     this.prefix = e.target.value
-    this.infoNo = this.prefix+this.seqNo
+    this.infoNo = this.prefix + this.seqNo
     console.log(this.infoNo);
     
   }
   
   loadSeqNo(e:any){
     this.seqNo = Number(e.target.value)
-    this.infoNo = this.prefix+this.seqNo
+    this.infoNo = this.prefix + this.seqNo
     console.log(this.infoNo);    
   }
 
-  // {{prefix}}{{seqNo+1}}
+  addInfoNo(infoNos:HTMLInputElement){
+    (this.fc.infoNoInput as FormArray)?.push(
+      new FormControl(infoNos.value)
+    )
+  }
 
+  onSave(){
+    if(this.isVisible == false) {
+      this.form.value.prefix=null
+      this.form.value.sequenceNo=0
+      console.log(this.form.value);     
+    }
+    else {
+      this.form.value.infoNoInput= this.tickets.map((ticket, i) => `${this.prefix}${this.seqNo + i}`);
+      console.log(this.form.value);
+    }  
+    alert("Successfully Added!");
+  }
+
+  onClear(){
+    this.childEmitter.emit();
+  }
 }

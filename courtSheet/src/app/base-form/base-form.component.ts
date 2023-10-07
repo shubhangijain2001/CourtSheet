@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,FormArray,FormBuilder, Validators } from '@angular/forms';
 // import { NgModule } from '@angular/core';
 
@@ -7,9 +7,11 @@ import { FormGroup, FormControl,FormArray,FormBuilder, Validators } from '@angul
   templateUrl: './base-form.component.html',
   styleUrls: ['./base-form.component.css']
 })
-export class BaseFormComponent {
-  form:any
+export class BaseFormComponent implements OnInit{
+  form:any;
+  infoContent:boolean=false
   obj:{[index:string]:any}={}
+  
   constructor(fb:FormBuilder){
     this.form= fb.group({
       court: ['',Validators.required],
@@ -20,12 +22,16 @@ export class BaseFormComponent {
     })
   }
 
+  ngOnInit(): void {
+    
+  }
+
   get fc(){
     return this.form.controls;
   }
 
   submit(){
-    
+    this.infoContent=true
     console.log(this.form)
     console.log(this.fc)
     Object.keys(this.fc).forEach((key)=>{
@@ -34,20 +40,24 @@ export class BaseFormComponent {
       const val=control.validator?control.validator:null
       
       if(val!=null && val(key)){
-        
-      this.obj[key]=val(key)
+        this.obj[key]=val(key)
       }
       
     })
-  
-    
     
   }
 
   clear(){
+    this.infoContent=false
     this.form.reset()
   }
+
+
   recordNo(e:any){
     const a=e.target.value
+  }
+
+  eventFired(msg:any){
+    this.clear()
   }
 }
