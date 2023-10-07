@@ -11,7 +11,6 @@ import { RequiredPipe } from './Pipes/required.pipe'
 
 import { GenerateInfoComponent } from './generate-info/generate-info.component';
 
-import { SubGenerateInfoComponent } from './sub-generate-info/sub-generate-info.component';
 
 
 @NgModule({
@@ -23,7 +22,6 @@ import { SubGenerateInfoComponent } from './sub-generate-info/sub-generate-info.
 
     GenerateInfoComponent,
    
-    SubGenerateInfoComponent,
 
     
   ],
