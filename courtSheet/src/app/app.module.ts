@@ -11,13 +11,14 @@ import { BaseFormComponent } from './base-form/base-form.component';
 import { GenerateInfoComponent } from './generate-info/generate-info.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     BaseFormComponent,
     RequiredPipe,
     GenerateInfoComponent,
-    
+
   ],
   imports: [
     BrowserModule,
