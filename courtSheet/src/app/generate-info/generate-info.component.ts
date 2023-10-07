@@ -15,6 +15,7 @@ export class GenerateInfoComponent{
   prefix:any='';
   seqNo:number=0;
   infoNo:string='';
+  pageLoad:boolean=true;
 
   tickets = [
     {
@@ -37,7 +38,7 @@ export class GenerateInfoComponent{
   constructor(fb: FormBuilder){ 
 
     this.form = fb.group({
-      prefix:[''],
+      prefix:['',Validators.pattern("[a-zA-Z0-9]+$")],
       sequenceNo:['',Validators.pattern("[0-9]*")],
       assignMag:[''],
       assignSlot:['', Validators.required]

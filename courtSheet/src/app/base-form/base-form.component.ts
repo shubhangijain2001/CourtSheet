@@ -12,9 +12,9 @@ export class BaseFormComponent {
   obj:{[index:string]:any}={}
   constructor(fb:FormBuilder){
     this.form= fb.group({
-      court: ['',[Validators.required,Validators.minLength(5)]],
+      court: ['',Validators.required],
       courtDate:['',Validators.required],
-      sortBy:['',Validators.required],
+      sortBy:[''],
       recordNo: ['',[Validators.required,Validators.pattern('[0-9]*')]],
       mode:['']
     })
