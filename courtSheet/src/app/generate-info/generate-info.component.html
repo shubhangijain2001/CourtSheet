@@ -22,6 +22,7 @@
           formControlName="prefix"
           (change)="loadPrefix($event)"
           >
+          <div class="alert alert-danger" *ngIf="fc.prefix.errors?.pattern">Only alphanumeric values are allowed</div>
       </div>
       <div class="col" *ngIf="isVisible==true">
           <label for="inputSeqNo" class="form-label">Sequence Number</label>
