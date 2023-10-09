@@ -71,7 +71,6 @@
             <td>{{ticket.issue_date | date:'shortDate' }}</td>
             <td>{{ticket.offendername}}</td>
             <td>
-                <!-- {{isVisible}} -->
               <label *ngIf="isVisible==true && seqNo!==0">{{prefix}}{{seqNo+i}}</label>
               <input type="text" 
               class="form-control"
