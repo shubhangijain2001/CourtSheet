@@ -42,21 +42,17 @@ export class BaseFormComponent implements OnInit{
   }
 
   submit(){
-    console.log(this.list);
+    // console.log(this.list);
     
     this.infoContent=true
-    console.log(this.form)
-    console.log(this.fc)
-    // Object.keys(this.fc).forEach((key)=>{
-    //   const control=this.fc[key]
-     
-    //   const val=control.validator?control.validator:null
-      
-    //   if(val!=null && val(key)){
-    //     this.obj[key]=val(key)
-    //   }
-      
-    // })
+    // console.log(this.form)
+    console.log(this.fc.sortBy.value)   
+    console.log(this.form.value );
+    
+
+    if(this.fc.sortBy.value == 'Ticket No.'){
+
+    }
     
   }
 
