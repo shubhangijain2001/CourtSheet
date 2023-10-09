@@ -1,6 +1,7 @@
 const court=require('../services/court.services')
 module.exports={
     courtList:(req,res)=>{
+        
        court.courtList((err,result)=>{
             if(err){
                 
@@ -10,7 +11,9 @@ module.exports={
         })
     },
     courtMaster:(req,res)=>{
-        court.courtMaster((err,result)=>{
+        console.log('params1',req.query.sortBy)
+        let data=req.query
+        court.courtMaster(data.sortBy,(err,result)=>{
             if(err){
                 return res.status(400).send(err)
             }
