@@ -19,3 +19,14 @@
 ::ng-deep .ui-dropdown .ui-dropdown-label {
     text-align: left !important; /* Reset text alignment */
 }
+
+::ng-deep .p-dropdown.p-component{
+    display: flex
+}
+
+::ng-deep .p-dropdown.p-component span{
+    padding-top: 6.5px;
+    padding-bottom: 6.5px;
+    border-radius: 10px;
+}
+
