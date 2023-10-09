@@ -39,11 +39,11 @@
 
     <div class="col-md-4">
         <label for="courtDate4" class="form-label">Number of records to be fetched<span style="color: red;">{{'' | required}}</span></label>
-        <input name="" id="" class="form-control" id="courtDate4" formControlName="recordNo" (keyup)="recordNo($event)">
+        <input name="" id="" class="form-control" id="courtDate4" formControlName="recordNo" (change)="recordNo($event)">
         <div *ngIf="fc.recordNo.errors?.required">
           <div *ngIf="fc.recordNo.touched && fc.recordNo.invalid" class="alert alert-danger">Field is required</div>
         </div>
-        <div *ngIf="fc.recordNo.errors?.pattern" class="alert alert-danger">Only numbers allowed</div>
+        <div *ngIf="fc.recordNo.errors?.pattern" class="alert alert-danger">Not a valid entry</div>
     </div>
 
     <div class="col-md-4">
@@ -70,8 +70,6 @@
         <button class="btn btn-success" (click)="clear()" >Clear</button>
         
     </div>
-
-
 
 </form>
 

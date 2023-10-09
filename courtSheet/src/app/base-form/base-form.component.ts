@@ -21,8 +21,12 @@ export class BaseFormComponent implements OnInit{
     this.form= fb.group({
       court: ['',Validators.required],
       courtDate:['',Validators.required],
+
       sortBy:['Ticket No'],
-      recordNo: ['',[Validators.required,Validators.pattern('[0-9]*')]],
+      recordNo: ['',[
+        Validators.required,
+        Validators.pattern('^(?!0$)[0-9]+$')
+      ]],
       mode:['']
     })
   }
@@ -61,7 +65,8 @@ export class BaseFormComponent implements OnInit{
 
 
   recordNo(e:any){
-    const a=e.target.value
+    const a=Number(e.target.value)
+    this.form.value.recordNo = a   
   }
 
   eventFired(msg:any){
