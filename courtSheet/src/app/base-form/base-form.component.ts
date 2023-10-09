@@ -45,6 +45,7 @@ export class BaseFormComponent implements OnInit{
 
   submit(){
     this.infoContent=true
+
     let val=this.fc.sortBy.value.name
     //console.log(this.form.get('sortBy').value)
     if(val=='Issue Date')
@@ -57,6 +58,9 @@ export class BaseFormComponent implements OnInit{
     else{
       this.api.sortByVal='ticket_no'
     }
+ this.api.ticketLimit = Number(this.fc.recordNo.value)
+    console.log(this.api.ticketLimit);
+    
     
   }
 
