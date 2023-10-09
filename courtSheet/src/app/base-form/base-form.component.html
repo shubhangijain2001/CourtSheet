@@ -9,12 +9,8 @@
 
     <div class="col-md-4">
       <label for="court" class="form-label">Court <span style="color: red;">{{'' | required}}</span></label>
-      <select id="court" class="form-select" formControlName="court">
-        <option selected disabled value="">Choose Court</option>
-        <option value="1">345-SADSDF</option>
-        <option value="2">742-GAFRGS</option>
-        <option value="3">612-TAGFTS</option>
-    </select>
+      <p-dropdown formControlName="court" [options]="list" optionLabel="court" ></p-dropdown>
+
       <div *ngIf="fc.court.errors?.required">
         <div *ngIf="fc.court.touched && fc.court.invalid" class="alert alert-danger">Field is required</div>
       </div>
@@ -32,12 +28,13 @@
 
     <div class="col-md-4">
         <label for="" class="form-label">Sort By</label>
-        <select name="" id="" class="form-select" formControlName="sortBy">
+        <p-dropdown formControlName="sortBy" [options]="sortByOptions" class="form-control"></p-dropdown>
+        <!-- <select name="" id="" class="form-select" formControlName="sortBy">
           <option selected disabled value="">Default</option>
           <option>Ticket No</option>
           <option>Issue Date</option>
           <option>Offender Name</option>
-        </select>
+        </select> -->
     </div>
 
     <div class="col-md-4">
