@@ -13,7 +13,7 @@ export class ApiCallService {
   }
   getCourtMaster(){
     console.log('sortByValue',this.sortByVal)
-    const params=new HttpParams().set('sortBy','issue_date')
+    const params=new HttpParams().set('sortBy',this.sortByVal)
     return this.http.get<any>('http://localhost:3000/getCourtMaster',{params})
   }
   postInfo(arr:any[]){
