@@ -45,23 +45,21 @@ export class BaseFormComponent implements OnInit{
 
   submit(){
     this.infoContent=true
-    // console.log(this.form)
 
-
-    if(this.fc.sortBy.value.name=='Ticket No.'){
-      this.api.sortByVal='ticket_no'
-    } 
-    else if(this.fc.sortBy.value.name=='Offender Name'){
-      this.api.sortByVal='offendername'
-    } 
-    else if(this.fc.sortBy.value.name=='Issue Date'){
-      this.api.sortByVal='issue_date'
-    }
+    let val=this.fc.sortBy.value.name
+    //console.log(this.form.get('sortBy').value)
+    if(val=='Issue Date')
+    this.api.sortByVal='issue_date'
+    else if(val=='Offender Name')
+    this.api.sortByVal='offendername'
+    else if(val=='Ticket No.'){
     this.api.sortByVal='ticket_no'
-    
-    this.api.ticketLimit = Number(this.fc.recordNo.value)
+    }
+    else{
+      this.api.sortByVal='ticket_no'
+    }
+ this.api.ticketLimit = Number(this.fc.recordNo.value)
     console.log(this.api.ticketLimit);
-    
     
     
   }

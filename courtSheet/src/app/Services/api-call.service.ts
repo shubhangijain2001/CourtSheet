@@ -14,6 +14,7 @@ export class ApiCallService {
   }
   getCourtMaster(){
     console.log('sortByValue',this.sortByVal)
+
     console.log('limit',this.ticketLimit);
     
     const params=new HttpParams().set('sortBy',this.sortByVal).set('limit',this.ticketLimit)
