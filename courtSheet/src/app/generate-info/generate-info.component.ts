@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { RequiredPipe } from '../Pipes/required.pipe';
-
+import { ApiCallService } from '../Services/api-call.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-generate-info',
   templateUrl: './generate-info.component.html',
@@ -17,6 +18,9 @@ export class GenerateInfoComponent{
   infoNo:string='';
   pageLoad:boolean=true;
   informationNo?:FormArray<any>;
+  sub!:Subscription
+  list:any
+  arr: { ticket: any; val: any; }[] = [];
   @Output() childEmitter = new EventEmitter();
 
 
@@ -38,7 +42,7 @@ export class GenerateInfoComponent{
     },
   ];
 
-  constructor(fb: FormBuilder){ 
+  constructor(fb: FormBuilder,private api:ApiCallService){ 
 
     this.form = fb.group({
       prefix:['',Validators.pattern("[a-zA-Z0-9]+$")],
@@ -46,6 +50,14 @@ export class GenerateInfoComponent{
       assignMag:[''],
       assignSlot:['', Validators.required],
       infoNoInput: fb.array([]) 
+    })
+  }
+
+  ngOnInit(){
+    const api1=this.api.getCourtMaster()
+    this.sub = api1.subscribe((val)=>{
+      this.list=val
+      console.log(this.list)
     })
   }
 
@@ -75,19 +87,38 @@ export class GenerateInfoComponent{
     (this.fc.infoNoInput as FormArray)?.push(
       new FormControl(infoNos.value)
     )
+    
   }
 
   onSave(){
     if(this.isVisible == false) {
       this.form.value.prefix=null
       this.form.value.sequenceNo=0
-      console.log(this.form.value);     
+      
     }
     else {
       this.form.value.infoNoInput= this.tickets.map((ticket, i) => `${this.prefix}${this.seqNo + i}`);
-      console.log(this.form.value);
+     
     }  
     alert("Successfully Added!");
+    
+    for (let i = 0; i < this.list.length; i++) {
+      this.arr.push({ ticket: this.list[i].ticket_no, val: this.form.value.infoNoInput[i] });
+    }
+    
+    this.api.postInfo(this.arr).subscribe({
+      next:response => {
+        
+        console.log('POST Request was successful', response);
+      },
+      error:error => {
+       
+        
+        console.error('Error occurred during POST request', error);
+      }
+    }
+    );
+    //console.log(this.form.value.infoNoInput)
   }
 
   onClear(){

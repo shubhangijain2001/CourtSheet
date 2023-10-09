@@ -14,6 +14,7 @@ export class BaseFormComponent implements OnInit{
   obj:{[index:string]:any}={}
   sub?: Subscription
   list!:any
+  sortByOptions:string[]=['Ticket No.','Issue Date','Offender Name']
   
   
   constructor(fb:FormBuilder,private api:ApiCallService){
