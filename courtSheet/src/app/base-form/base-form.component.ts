@@ -17,7 +17,10 @@ export class BaseFormComponent implements OnInit{
       court: ['',Validators.required],
       courtDate:['',Validators.required],
       sortBy:[''],
-      recordNo: ['',[Validators.required,Validators.pattern('[0-9]*')]],
+      recordNo: ['',[
+        Validators.required,
+        Validators.pattern('^(?!0$)[0-9]+$')
+      ]],
       mode:['']
     })
   }
@@ -34,16 +37,16 @@ export class BaseFormComponent implements OnInit{
     this.infoContent=true
     console.log(this.form)
     console.log(this.fc)
-    Object.keys(this.fc).forEach((key)=>{
-      const control=this.fc[key]
+    // Object.keys(this.fc).forEach((key)=>{
+    //   const control=this.fc[key]
      
-      const val=control.validator?control.validator:null
+    //   const val=control.validator?control.validator:null
       
-      if(val!=null && val(key)){
-        this.obj[key]=val(key)
-      }
+    //   if(val!=null && val(key)){
+    //     this.obj[key]=val(key)
+    //   }
       
-    })
+    // })
     
   }
 
@@ -54,7 +57,8 @@ export class BaseFormComponent implements OnInit{
 
 
   recordNo(e:any){
-    const a=e.target.value
+    const a=Number(e.target.value)
+    this.form.value.recordNo = a   
   }
 
   eventFired(msg:any){
