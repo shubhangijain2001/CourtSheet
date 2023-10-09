@@ -14,14 +14,14 @@ export class BaseFormComponent implements OnInit{
   obj:{[index:string]:any}={}
   sub?: Subscription
   list!:any
-  sortByOptions:string[]=['Ticket No.','Issue Date','Offender Name']
+  sortByOptions:any[]=[{name:'Ticket No.'},{name:'Issue Date'},{name:'Offender Name'}]
   
   
   constructor(fb:FormBuilder,private api:ApiCallService){
     this.form= fb.group({
       court: ['',Validators.required],
       courtDate:['',Validators.required],
-      sortBy:[''],
+      sortBy:['Ticket No'],
       recordNo: ['',[Validators.required,Validators.pattern('[0-9]*')]],
       mode:['']
     })
@@ -32,6 +32,7 @@ export class BaseFormComponent implements OnInit{
     this.sub = api1.subscribe((val)=>{
       this.list=val
     })
+    
   }
 
   get fc(){
@@ -39,22 +40,18 @@ export class BaseFormComponent implements OnInit{
   }
 
   submit(){
-    console.log(this.list);
-    
     this.infoContent=true
     console.log(this.form)
-    console.log(this.fc)
-    // Object.keys(this.fc).forEach((key)=>{
-    //   const control=this.fc[key]
-     
-    //   const val=control.validator?control.validator:null
-      
-    //   if(val!=null && val(key)){
-    //     this.obj[key]=val(key)
-    //   }
-      
-    // })
-    
+    console.log(this.fc.sortBy.value)
+    //console.log(this.form.get('sortBy').value)
+    if(this.fc.sortBy.value='Issue Date')
+    this.api.sortByVal='issue_date'
+    else if(this.fc.sortBy.value='Offender Name')
+    this.api.sortByVal='offendername'
+    else if(this.fc.sortBy.value='Ticket No.'){
+    this.api.sortByVal='ticket_no'
+    console.log(this.api.sortByVal)
+    }
   }
 
   clear(){
