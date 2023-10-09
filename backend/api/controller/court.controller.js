@@ -13,7 +13,7 @@ module.exports={
     courtMaster:(req,res)=>{
         console.log('params1',req.query.sortBy)
         let data=req.query
-        court.courtMaster(data.sortBy,(err,result)=>{
+        court.courtMaster(data,(err,result)=>{
             if(err){
                 return res.status(400).send(err)
             }

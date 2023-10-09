@@ -6,6 +6,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http'
 export class ApiCallService {
   courtList!:any
   sortByVal:string
+  ticketLimit:number
   constructor(public http:HttpClient) { }
 
   getData(){
@@ -13,7 +14,9 @@ export class ApiCallService {
   }
   getCourtMaster(){
     console.log('sortByValue',this.sortByVal)
-    const params=new HttpParams().set('sortBy','issue_date')
+    console.log('limit',this.ticketLimit);
+    
+    const params=new HttpParams().set('sortBy',this.sortByVal).set('limit',this.ticketLimit)
     return this.http.get<any>('http://localhost:3000/getCourtMaster',{params})
   }
   postInfo(arr:any[]){
