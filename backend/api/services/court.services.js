@@ -13,8 +13,9 @@ module.exports={
        })
     },
     courtMaster:(data,callback)=>{
-        console.log('sortBy',data)
-        client.query(`select * from courtmaster ORDER BY ${data}`,(err,result)=>{
+        console.log('sortBy',data.sortBy)
+        console.log(data.limit);
+        client.query(`select * from courtmaster ORDER BY ${data.sortBy} limit ${data.limit}`,(err,result)=>{
             if(!err){
                 callback(null,result)
             }
