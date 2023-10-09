@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { RequiredPipe } from '../Pipes/required.pipe';
 import { ApiCallService } from '../Services/api-call.service';
 import { Subscription } from 'rxjs';
 @Component({
@@ -57,7 +56,6 @@ export class GenerateInfoComponent{
     const api1=this.api.getCourtMaster()
     this.sub = api1.subscribe((val)=>{
       this.list=val
-      console.log(this.list)
     })
   }
 
@@ -67,20 +65,17 @@ export class GenerateInfoComponent{
 
   checkVisibility(e:any){
     this.isVisible = e.target.value=="true"?true:false
-    console.log(this.isVisible);
   }
 
   loadPrefix(e:any){
     this.prefix = e.target.value
     this.infoNo = this.prefix + this.seqNo
-    console.log(this.infoNo);
     
   }
   
   loadSeqNo(e:any){
     this.seqNo = Number(e.target.value)
     this.infoNo = this.prefix + this.seqNo
-    console.log(this.infoNo);    
   }
 
   addInfoNo(infoNos:HTMLInputElement){
@@ -107,18 +102,14 @@ export class GenerateInfoComponent{
     }
     
     this.api.postInfo(this.arr).subscribe({
-      next:response => {
-        
+      next:response => {        
         console.log('POST Request was successful', response);
       },
-      error:error => {
-       
-        
+      error:error => {        
         console.error('Error occurred during POST request', error);
       }
     }
-    );
-    //console.log(this.form.value.infoNoInput)
+    )
   }
 
   onClear(){

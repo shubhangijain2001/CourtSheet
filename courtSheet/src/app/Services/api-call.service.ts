@@ -12,11 +12,7 @@ export class ApiCallService {
   getData(){
    return this.http.get<any>('http://localhost:3000/getCourtList')
   }
-  getCourtMaster(){
-    console.log('sortByValue',this.sortByVal)
-
-    console.log('limit',this.ticketLimit);
-    
+  getCourtMaster(){    
     const params=new HttpParams().set('sortBy',this.sortByVal).set('limit',this.ticketLimit)
     return this.http.get<any>('http://localhost:3000/getCourtMaster',{params})
   }
