@@ -68,7 +68,7 @@
         <tbody>
           <tr *ngFor="let ticket of list; let i=index">
             <td>{{ticket.ticket_no}}</td>
-            <td>{{ticket.issue_date | date:'shortDate' }}</td>
+            <td>{{ticket.issue_date | date:'mediumDate' }}</td>
             <td>{{ticket.offendername}}</td>
             <td>
               <label *ngIf="isVisible==true && seqNo!==0">{{prefix}}{{seqNo+i}}</label>
