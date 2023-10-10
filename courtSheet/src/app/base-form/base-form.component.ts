@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,FormArray,FormBuilder, Validators } from '@angular/forms';
-// import { NgModule } from '@angular/core';
 import { ApiCallService } from '../Services/api-call.service';
 import { Subscription } from 'rxjs';
 @Component({
@@ -47,20 +46,18 @@ export class BaseFormComponent implements OnInit{
     this.infoContent=true
 
     let val=this.fc.sortBy.value.name
-    //console.log(this.form.get('sortBy').value)
-    if(val=='Issue Date')
-    this.api.sortByVal='issue_date'
-    else if(val=='Offender Name')
-    this.api.sortByVal='offendername'
-    else if(val=='Ticket No.'){
-    this.api.sortByVal='ticket_no'
-    }
-    else{
-      this.api.sortByVal='ticket_no'
-    }
- this.api.ticketLimit = Number(this.fc.recordNo.value)
-    console.log(this.api.ticketLimit);
     
+    if (val == 'Issue Date') {
+      this.api.sortByVal = 'issue_date'
+    } else if (val == 'Offender Name') {
+      this.api.sortByVal = 'offendername'
+    } else if (val == 'Ticket No.') {
+      this.api.sortByVal = 'ticket_no'
+    } else {
+      this.api.sortByVal = 'ticket_no'
+    }
+
+    this.api.ticketLimit = Number(this.fc.recordNo.value)
     
   }
 
